@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SENS DU BÉNIN | Haute Gastronomie Dahoméenne à Paris</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --accent: #E65100;
+            --bg-creme: #FFF8F0;
+            --text-dark: #2D241E;
+            --gold: #D4AF37;
+        }
+
+        html, body { max-width: 100%; overflow-x: hidden; margin: 0; padding: 0; scroll-behavior: smooth; }
+        * { box-sizing: border-box; }
+        body { background-color: var(--bg-creme); color: var(--text-dark); font-family: 'Outfit', sans-serif; line-height: 1.8; }
+        h1, h2, h3 { font-family: 'Syne', sans-serif; text-transform: uppercase; line-height: 1.1; }
+
+        /* --- Navigation --- */
+        nav {
+            position: fixed; width: 100%; padding: 15px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(255, 248, 240, 0.98); z-index: 2000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .logo { font-size: 1.2rem; font-weight: 800; letter-spacing: 2px; color: var(--text-dark); text-decoration: none; }
+        .nav-links a { text-decoration: none; color: var(--text-dark); margin-left: 15px; font-weight: 600; font-size: 0.8rem; }
+
+        /* --- Hero --- */
+        header { min-height: 100vh; display: flex; flex-wrap: wrap; background: #fff; }
+        .hero-left { flex: 1; padding: 120px 8% 60px; display: flex; flex-direction: column; justify-content: center; background: var(--bg-creme); }
+        .hero-right { 
+            flex: 0.8; 
+            background: #ddd url('https://images.unsplash.com/photo-1543353071-10c8ba85a904?q=80&w=1500&auto=format&fit=crop') center/cover; 
+            clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%); 
+        }
+
+        /* --- Section À Propos --- */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .about-text .dropcap { float: left; font-family: 'Syne'; font-size: 4rem; line-height: 1; padding: 10px 10px 0 0; color: var(--accent); }
+        .about-images { position: relative; height: 500px; }
+        .img-main { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; box-shadow: 20px 20px 60px rgba(0,0,0,0.1); }
+        .img-sub { position: absolute; bottom: -20px; right: -20px; width: 50%; height: 50%; object-fit: cover; border-radius: 20px; border: 8px solid var(--bg-creme); background: #ccc; }
+
+        /* --- Sections --- */
+        section { padding: 100px 8%; width: 100%; }
+        .section-tag { color: var(--accent); font-weight: 800; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; display: block; font-size: 0.9rem;}
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+
+        /* --- Menu Cards --- */
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 50px; }
+        .menu-card { background: #fff; border-radius: 30px; overflow: hidden; transition: all 0.4s ease; border: 1px solid rgba(0,0,0,0.05); }
+        .menu-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .menu-img-container { height: 280px; overflow: hidden; position: relative; }
+        .menu-img-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .menu-card:hover .menu-img-container img { scale: 1.1; }
+        .price-tag { position: absolute; top: 20px; right: 20px; background: var(--accent); color: white; padding: 8px 15px; border-radius: 50px; font-weight: 700; font-size: 0.9rem; z-index: 10; }
+        .menu-content { padding: 30px; }
+        .menu-content h3 { margin: 0 0 10px 0; font-size: 1.4rem; color: var(--text-dark); }
+        .menu-content p { font-size: 0.95rem; color: #666; margin-bottom: 20px; line-height: 1.5; }
+        .menu-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed #eee; padding-top: 15px; }
+        .dietary { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--gold); font-weight: 700; }
+
+        /* --- Avis --- */
+        .reviews-container { display: flex; gap: 20px; overflow-x: auto; padding: 20px 0; scroll-snap-type: x mandatory; scrollbar-width: none; }
+        .reviews-container::-webkit-scrollbar { display: none; }
+        .review-card { min-width: 320px; background: white; padding: 30px; border-radius: 20px; scroll-snap-align: start; border: 1px solid rgba(0,0,0,0.05); }
+        .stars { color: var(--gold); margin-bottom: 15px; }
+        .reviewer { display: flex; align-items: center; gap: 15px; margin-top: 20px; }
+        .reviewer img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; }
+
+        /* --- Équipe --- */
+        .team-member { position: relative; height: 500px; border-radius: 25px; overflow: hidden; background: #ccc; }
+        .team-member img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        /* --- Formulaire --- */
+        form { width: 100%; }
+        input, select, textarea { 
+            width: 100%; padding: 18px; margin-bottom: 15px; border-radius: 12px; border: 2px solid #eee; 
+            background-color: #ffffff; color: #2D241E; font-family: 'Outfit', sans-serif; font-size: 1rem; outline: none; transition: 0.3s;
+        }
+        input:focus, textarea:focus { border-color: var(--accent); }
+
+        /* --- Animation Reveal --- */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* --- Responsivité --- */
+        @media (max-width: 900px) {
+            header { flex-direction: column; }
+            .hero-right { display: none; }
+            .about-grid { grid-template-columns: 1fr; }
+            .about-images { height: 350px; margin-bottom: 40px; }
+            h1 { font-size: 3rem !important; }
+            section { padding: 60px 5%; }
+        }
+
+        .big-btn { background: var(--accent); color: white; padding: 20px 40px; text-decoration: none; border-radius: 50px; font-weight: 800; display: inline-block; border: none; cursor: pointer; transition: 0.3s; text-align: center; }
+        .big-btn:hover { background: #bf4300; transform: scale(1.05); }
+        footer { background: var(--text-dark); color: white; padding: 80px 8% 40px; text-align: center; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="#" class="logo">SENS DU BÉNIN</a>
+    <div class="nav-links">
+        <a href="#about">Histoire</a>
+        <a href="#menu">Carte</a>
+        <a href="#reserve">Réservation</a>
+    </div>
+</nav>
+
+<header>
+    <div class="hero-left">
+        <span class="section-tag animate__animated animate__fadeInDown">Gastronomie Dahoméenne</span>
+        <h1 style="font-size: 5rem;">SENS DU <br><span style="color: var(--accent);">BÉNIN.</span></h1>
+        <p style="margin: 25px 0; font-size: 1.2rem;">L'élégance de la cuisine royale d'Abomey au cœur de Paris.</p>
+        <a href="#reserve" class="big-btn">RÉSERVER UNE TABLE</a>
+    </div>
+    <div class="hero-right"></div>
+</header>
+
+<section id="about">
+    <div class="about-grid">
+        <div class="about-images reveal">
+            <img src="https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?q=80&w=1000&auto=format&fit=crop" class="img-main" alt="Art Culinaire">
+            <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=500&auto=format&fit=crop" class="img-sub" alt="Épices de Ouidah">
+        </div>
+        <div class="about-text reveal">
+            <span class="section-tag">Héritage</span>
+            <h2>Une épopée culinaire</h2>
+            <p><span class="dropcap">N</span>ous avons ramené avec nous le secret des rois d'Abomey. Chaque plat servi chez Sens du Bénin est une pièce d'histoire, travaillée avec les meilleurs produits du terroir français.</p>
+            <p>Notre Chef Koffi met un point d'honneur à respecter les traditions pour l'igname pilée tout en apportant une modernité visuelle unique et un dressage digne des plus grandes tables parisiennes.</p>
+        </div>
+    </div>
+</section>
+
+<section id="menu">
+    <div style="text-align: center; margin-bottom: 60px;">
+        <span class="section-tag reveal">La Carte Signature</span>
+        <h2 class="reveal">Saveurs du Dahomey</h2>
+    </div>
+    <div class="menu-grid">
+        <div class="menu-card reveal">
+            <div class="menu-img-container">
+                <span class="price-tag">28€</span>
+                <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=800&auto=format&fit=crop" alt="Igname Pilée">
+            </div>
+            <div class="menu-content">
+                <div class="dietary">Incontournable</div>
+                <h3>L'Igname Pilée Royale</h3>
+                <p>Foufou traditionnel battu avec passion, servi avec une sauce graine onctueuse et ses morceaux de bœuf sélectionnés.</p>
+                <div class="menu-footer">
+                    <span><i class="fas fa-pepper-hot" style="color:var(--accent)"></i> Épicé</span>
+                    <span style="font-weight: 600;">Chef's Choice</span>
+                </div>
+            </div>
+        </div>
+        <div class="menu-card reveal">
+            <div class="menu-img-container">
+                <span class="price-tag">32€</span>
+                <img src="https://images.unsplash.com/photo-1580476262798-bddd9f4b7369?q=80&w=800&auto=format&fit=crop" alt="Poisson Braisé">
+            </div>
+            <div class="menu-content">
+                <div class="dietary">Grillade</div>
+                <h3>Daurade à la Cotonnoise</h3>
+                <p>Daurade entière marinée aux herbes du pays, grillée au feu de bois, servie avec un Atassi bicolore fondant.</p>
+                <div class="menu-footer">
+                    <span><i class="fas fa-leaf" style="color:green"></i> Frais</span>
+                    <span style="font-weight: 600;">Signature</span>
+                </div>
+            </div>
+        </div>
+        <div class="menu-card reveal">
+            <div class="menu-img-container">
+                <span class="price-tag">24€</span>
+                <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=800&auto=format&fit=crop" alt="Amiwo">
+            </div>
+            <div class="menu-content">
+                <div class="dietary">Tradition</div>
+                <h3>L'Amiwo au Poulet</h3>
+                <p>Pâte de maïs rouge raffinée, accompagnée de poulet fermier braisé et d'une sauce tomate aux oignons croquants.</p>
+                <div class="menu-footer">
+                    <span><i class="fas fa-fire" style="color:orange"></i> Braisé</span>
+                    <span style="font-weight: 600;">Authentique</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="equipe">
+    <span class="section-tag">La Brigade</span>
+    <h2 style="margin-bottom: 40px;">Les Artisans</h2>
+    <div class="grid-3">
+        <div class="team-member reveal">
+            <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?q=80&w=800&auto=format&fit=crop" alt="Chef Koffi">
+            <div style="position:absolute; bottom:0; width:100%; background:linear-gradient(transparent, rgba(0,0,0,0.9)); padding:30px; color:white;">
+                <h3 style="margin:0">Chef Koffi</h3>
+                <p style="margin:0; opacity:0.8;">Chef Exécutif</p>
+            </div>
+        </div>
+        <div class="team-member reveal">
+            <img src="https://images.unsplash.com/photo-1595273670150-bd0c3c392e46?q=80&w=800&auto=format&fit=crop" alt="Sèna">
+            <div style="position:absolute; bottom:0; width:100%; background:linear-gradient(transparent, rgba(0,0,0,0.9)); padding:30px; color:white;">
+                <h3 style="margin:0">Sèna</h3>
+                <p style="margin:0; opacity:0.8;">Maître d'Hôtel</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="avis" style="background-color: #fcf6f0;">
+    <span class="section-tag reveal">Témoignages</span>
+    <h2 class="reveal" style="margin-bottom: 40px;">L'expérience de nos convives</h2>
+    <div class="reviews-container reveal">
+        <div class="review-card">
+            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p>"Une révélation. L'igname pilée est d'une finesse incroyable. Le cadre nous transporte directement au Bénin."</p>
+            <div class="reviewer">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100&h=100&auto=format&fit=crop" alt="Client">
+                <div><h4 style="margin:0">Jean-Pierre D.</h4><small>Critique Gastronomique</small></div>
+            </div>
+        </div>
+        <div class="review-card">
+            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p>"Le mélange des épices et des produits français est une réussite totale. Un voyage culinaire mémorable."</p>
+            <div class="reviewer">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=100&h=100&auto=format&fit=crop" alt="Client">
+                <div><h4 style="margin:0">Marie-Laure K.</h4><small>Gourmet</small></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="reserve" style="background: #fff;">
+    <div class="about-grid">
+        <div class="reveal">
+            <span class="section-tag">Réservation</span>
+            <h2>Votre Table</h2>
+            <form>
+                <input type="text" placeholder="Nom complet" required>
+                <input type="email" placeholder="Email de contact" required>
+                <input type="date" required>
+                <input type="number" placeholder="Nombre de convives" min="1" max="10" required>
+                <textarea placeholder="Une occasion particulière ?" rows="4"></textarea>
+                <button type="submit" class="big-btn" style="width:100%">CONFIRMER LA DEMANDE</button>
+            </form>
+        </div>
+        <div class="reveal">
+            <h3>Contact & Accès</h3>
+            <p><i class="fas fa-map-marker-alt" style="color:var(--accent)"></i> 122 Rue du Faubourg St Denis, 75010 Paris</p>
+            <p><i class="fas fa-phone" style="color:var(--accent)"></i> +33 1 23 45 67 89</p>
+            <div style="height:350px; background:#eee; border-radius:20px; margin-top:20px; overflow:hidden; border: 1px solid #ddd;">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.08643198822!2d2.3533816!3d48.8756317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e138a2e5d59%3A0xc3f5c7694f454a85!2s122%20Rue%20du%20Faubourg%20Saint-Denis%2C%2075010%20Paris!5e0!3m2!1sfr!2sfr!4v1715850000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="logo" style="font-size: 2rem; color: var(--accent); margin-bottom: 20px; display: block;">SENS DU BÉNIN</div>
+    <div style="margin-bottom: 30px;">
+        <a href="#" style="color:white; margin:0 15px; font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
+        <a href="#" style="color:white; margin:0 15px; font-size: 1.5rem;"><i class="fab fa-facebook"></i></a>
+    </div>
+    <p>© 2026 - Gastronomie Béninoise de Prestige | Paris</p>
+</footer>
+
+<script>
+    // Animation au défilement
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Smooth scroll pour les ancres
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
